@@ -12,3 +12,5 @@ if (!ATLAS_URI){
     console.log("No ATLAS_URI env variable has been defined in config.env");
     process.exit(1);
 }
+
+connectToDatabase(ATLAS_URI).then().catch();
