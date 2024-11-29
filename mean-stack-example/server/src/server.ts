@@ -13,4 +13,11 @@ if (!ATLAS_URI){
     process.exit(1);
 }
 
-connectToDatabase(ATLAS_URI).then(()=>{}).catch();
+connectToDatabase(ATLAS_URI).then(()=>{
+    const app = express();
+    app.use(cors());
+    //start the Express server
+    app.listen(5200,()=>{
+        console.log("Server running");
+    })
+}).catch();
