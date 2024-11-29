@@ -13,4 +13,4 @@ if (!ATLAS_URI){
     process.exit(1);
 }
 
-connectToDatabase(ATLAS_URI).then().catch();
+connectToDatabase(ATLAS_URI).then(()=>{}).catch();
