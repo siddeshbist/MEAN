@@ -16,6 +16,10 @@ export async function connectToDatabase(uri:string){
 
     const employeesCollection = db.collection<Employee>("employees");//creating employee collection on our database called employees
     collections.employees = employeesCollection; //add collection to collections which is being exported
+}
 
-
+function applySchemaValidation(db: mongodb.Db){
+    const jsonSchema = {
+        
+    }
 }
