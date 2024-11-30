@@ -20,4 +20,4 @@ connectToDatabase(ATLAS_URI).then(()=>{
     app.listen(5200,()=>{
         console.log("Server running");
     })
-}).catch((error)=>console.error(error));//no curly braces means implicit return
+}).catch((error)=>console.log("Error"));//no curly braces means implicit return
