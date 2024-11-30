@@ -7,4 +7,10 @@ export const employeeRouter = express.Router();
 employeeRouter.use(express.json());
 
 //get route
-employeeRouter.get("/",()=>{})
+employeeRouter.get("/",(req,res)=>{
+    try{
+
+    }catch(error){
+        res.status(500).send(error instanceof Error? error.message:"Unknown errror");
+    }
+})
