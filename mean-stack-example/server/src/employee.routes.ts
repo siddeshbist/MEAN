@@ -5,3 +5,6 @@ import {collections} from "./database";
 //express router
 export const employeeRouter = express.Router();
 employeeRouter.use(express.json());
+
+//get route
+employeeRouter.get("/",()=>{})
