@@ -46,10 +46,10 @@ employeeRouter.get('/users/:name',(req,res)=>{
 //MongoDB automatically generates an _id field for every document in a collection
 //new ObjectId(id) ensures id string entered in URL is converted into an ObjectId type, which is required when querying MongoDBs _id field
 
-employeeRouter.post("/",(req,res)=>{
+employeeRouter.post("/",async(req,res)=>{
     try{
         const employee = req.body;
-        const result = collections.employees.insertOne(employee);
+        const result = await collections?.employees?.insertOne(employee);
 
     }catch(error){
         console.error(error)
