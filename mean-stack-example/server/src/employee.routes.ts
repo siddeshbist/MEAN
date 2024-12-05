@@ -32,11 +32,11 @@ employeeRouter.get("/:id",async(req,res)=>{
         res.status(404).send(`Failed to find an employee: ID ${req?.params?.id}`);
     }
 })
-
-employeeRouter.get('/users/:name',(req,res)=>{
-    const name = req.params.name;
-    res.send(`The ID being requested is ${name}`);
-})
+//Just an example of route parameters
+// employeeRouter.get('/users/:name',(req,res)=>{
+//     const name = req.params.name;
+//     res.send(`The ID being requested is ${name}`);
+// })
 
 //READ THESE COMMENTS FUTURE SID
 // HTML Status Code 404 is a client side error 
