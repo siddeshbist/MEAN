@@ -20,7 +20,13 @@ employeeRouter.get("/:id",async(req,res)=>{
     try{
         const id = req?.params?.id;//wtf is ?. and wtf is req.params
         const query = {_id: new ObjectId(id)};//wtf is ObjectID again 
-        const employee = await collections.employees?.findOne(query)
+        const employee = await collections.employees?.findOne(query);
+
+        if (employee){
+            res.status(200).send(employee);
+        }else{
+            res.status(404).send(`Failed to find employee with id ${id}`);
+        }
         
     }catch(error){
         res.status(404).send(`Failed to find an employee: ID ${req?.params?.id}`);
