@@ -15,3 +15,27 @@ employeeRouter.get("/",async(req,res)=>{
         res.status(500).send(error instanceof Error? error.message:"Unknown errror");
     }
 })
+
+employeeRouter.get("/:id",async(req,res)=>{
+    try{
+        const id = req?.params?.id;//wtf is ?. and wtf is req.params
+        const query = {_id: new ObjectId(id)};//wtf is ObjectID again 
+        const employee = await collections.employees?.findOne(query)
+        
+    }catch(error){
+        res.status(404).send(`Failed to find an employee: ID ${req?.params?.id}`);
+    }
+})
+
+employeeRouter.get('/users/:name',(req,res)=>{
+    const name = req.params.name;
+    res.send(`The ID being requested is ${name}`);
+})
+
+//READ THESE COMMENTS FUTURE SID
+// HTML Status Code 404 is a client side error 
+//HTML Status Code 500 is a server side error
+//req(uest) object contains a params attribute 
+//:name is a route parameter which can be extracted and stored
+//MongoDB automatically generates an _id field for every document in a collection
+//new ObjectId(id) ensures id string entered in URL is converted into an ObjectId type, which is required when querying MongoDBs _id field
