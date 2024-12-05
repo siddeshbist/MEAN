@@ -2,6 +2,8 @@ import * as dotenv from "dotenv" //use dotenv package to read from .env file
 import express from "express";
 import cors from "cors";
 import { connectToDatabase } from "./database";
+import { employeeRouter } from "./employee.routes";
+
 
 
 dotenv.config();//Load environment variables from the .env file where the ATLAS_URI is configured
@@ -16,6 +18,7 @@ if (!ATLAS_URI){
 connectToDatabase(ATLAS_URI).then(()=>{
     const app = express();
     app.use(cors());
+    app.use("/employees",employeeRouter);
     //start the Express server
     app.listen(5200,()=>{
         console.log("Server running");
