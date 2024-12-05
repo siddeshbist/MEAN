@@ -48,6 +48,8 @@ employeeRouter.get('/users/:name',(req,res)=>{
 
 employeeRouter.post("/",(req,res)=>{
     try{
+        const employee = req.body;
+        const result = collections.employees.insertOne(employee);
 
     }catch(error){
         console.error(error)
