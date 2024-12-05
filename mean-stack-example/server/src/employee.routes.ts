@@ -51,6 +51,12 @@ employeeRouter.post("/",async(req,res)=>{
         const employee = req.body;
         const result = await collections?.employees?.insertOne(employee);
 
+        if (result?.acknowledged){
+            res.status(201).send(`Created a new employee: ID ${result.insertedId}`); //back tics for string interpolation
+        }else{
+            res.status(500).send("Failed to created new employee.") //double quotes as all string
+        }
+
     }catch(error){
         console.error(error)
         res.status(400).send(error instanceof Error ? error.message:"Unknown error");
