@@ -65,3 +65,44 @@ employeeRouter.post("/",async(req,res)=>{
 
 //HTTP status code 201 means the server has successfully processed the request and as a result a new resources has been created
 //HTTP status cdoe 400 means the server cannot process the request because of a client side error such as malformed syntax, invalid data or missing parameters
+
+employeeRouter.put("/:id",async(req,res)=>{
+    try{
+        const id = req?.params?.id;
+        const employee = req.body;
+        const query = {_id:new ObjectId(id)};
+        const result = await collections?.employees?.updateOne(query,{$set:employee});
+
+        if (result && result.matchedCount){
+            res.status(200).send(`Updated an employee: ID ${id}`);
+        } else if (!result?.matchedCount){
+            res.status(404).send(`Failed to find an employee: ID ${id}`);
+        } else{
+            res.status(304).send(`Failed to update an employee: ID ${id}`);
+        }
+    }catch(error){
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error(message);
+        res.status(400).send(message);
+    }
+});
+
+employeeRouter.delete("/:id",async(req,res)=>{
+    try{
+        const id = req?.params?.id;
+        const query = {_id: new ObjectId(id)};
+        const result = await collections?.employees?.deleteOne(query);
+
+        if(result && result.deletedCount){
+            res.status(202).send(`Removed an employee: ID${id}`);
+        }else if(!result){
+            res.status(400).send(`Failed to remove an employee: ID ${id}`);
+        }else if (!result.deletedCount){
+            res.status(404).send(`Failed to find an employee: ID ${id}`);
+        }
+    }catch(error){
+        const message = error instanceof Error ? error.message : "Unknown error";
+        console.error(message);
+        res.status(400).send(message);
+    }
+})
