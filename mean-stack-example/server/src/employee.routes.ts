@@ -45,3 +45,15 @@ employeeRouter.get('/users/:name',(req,res)=>{
 //:name is a route parameter which can be extracted and stored
 //MongoDB automatically generates an _id field for every document in a collection
 //new ObjectId(id) ensures id string entered in URL is converted into an ObjectId type, which is required when querying MongoDBs _id field
+
+employeeRouter.post("/",(req,res)=>{
+    try{
+
+    }catch(error){
+        console.error(error)
+        res.status(400).send(error instanceof Error ? error.message:"Unknown error");
+    }
+})
+
+//HTTP status code 201 means the server has successfully processed the request and as a result a new resources has been created
+//HTTP status cdoe 400 means the server cannot process the request because of a client side error such as malformed syntax, invalid data or missing parameters
