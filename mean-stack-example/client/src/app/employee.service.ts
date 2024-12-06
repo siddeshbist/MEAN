@@ -51,6 +51,25 @@ export class EmployeeService {
     return this.employees$();//() at end means the signal is being invoked as a function which retreives current value stored in the signal
   }
 
+  getEmployee(id:string){
+    this.httpClient.get<Employee>(`${this.url}/employees/${id}`)
+    .subscribe(employee => {
+      this.employee$.set(employee);
+      return this.employee$();
+    })
+  }
+
+  createEmployee(employee:Employee){
+    return this.httpClient.post(`${this.url}/employees`,employee,{responseType:'text'});
+  }
+
+  updateEmployee(id:string,employee:Employee){
+    return this.httpClient.put(`${this.url}/employees/${id}`,employee,{responseType:'text'});
+  }
+
+  deleteEmployee(id:string){
+    return this.httpClient.delete(`${this.url}/employees/${id}`,{responseType:'text'});
+  }
 
 }
 
