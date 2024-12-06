@@ -45,6 +45,11 @@ export class EmployeeService {
       this.employees$.set(employees);
     });
   }
+//pulic method 
+  getEmployees(){
+    this.refreshEmployees();
+    return this.employees$();//() at end means the signal is being invoked as a function which retreives current value stored in the signal
+  }
 
 
 }
