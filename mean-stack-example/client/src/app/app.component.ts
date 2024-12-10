@@ -1,15 +1,27 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { EmployeesListComponent } from './employees-list/employees-list.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
+  imports: [RouterOutlet, EmployeesListComponent, MatToolbarModule],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <mat-toolbar>
+      <span>Employees Management System</span>
+    </mat-toolbar>
+    <main>
+      <router-outlet />
+    </main>
   `,
-  styles: [],
+  styles: [
+    `main {
+      display: flex;
+      justify-content: center;
+      padding: 2rem 4 rem;
+    }`
+  ],
 })
 export class AppComponent {
   title = 'client';
