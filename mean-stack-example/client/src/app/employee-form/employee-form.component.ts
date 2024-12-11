@@ -1,5 +1,5 @@
 import { Component, effect, EventEmitter, input, Output } from '@angular/core';
-import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, Validators, ReactiveFormsModule, FormGroup, Form } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatRadioModule } from '@angular/material/radio';
@@ -82,7 +82,7 @@ import { Employee } from '../employee';
   `,
 })
 export class EmployeeFormComponent {
-  initialState = input<Employee>();
+  initialState = input<Employee>(); //signal
 
   @Output()
   formValuesChanged = new EventEmitter<Employee>();
@@ -90,13 +90,17 @@ export class EmployeeFormComponent {
   @Output()
   formSubmitted = new EventEmitter<Employee>();
 
-  employeeForm = this.formBuilder.group({
-    name: ['', [Validators.required, Validators.minLength(3)]],
-    position: ['', [Validators.required, Validators.minLength(5)]],
-    level: ['junior', [Validators.required]],
-  });
+  employeeForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder){}
+
+  ngOnInit() {
+    this.employeeForm = this.formBuilder.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      position: ['', [Validators.required, Validators.minLength(5)]],
+      level: ['junior', [Validators.required]],
+    });
+
     effect(() => {
       this.employeeForm.setValue({
         name: this.initialState()?.name || '',
@@ -105,6 +109,22 @@ export class EmployeeFormComponent {
       });
     });
   }
+
+  // employeeForm = this.formBuilder.group({
+  //   name: ['', [Validators.required, Validators.minLength(3)]],
+  //   position: ['', [Validators.required, Validators.minLength(5)]],
+  //   level: ['junior', [Validators.required]],
+  // });
+
+  // constructor(private formBuilder: FormBuilder) {
+  //   effect(() => {
+  //     this.employeeForm.setValue({
+  //       name: this.initialState()?.name || '',
+  //       position: this.initialState()?.position || '',
+  //       level: this.initialState()?.level || 'junior',
+  //     });
+  //   });
+  // }
 
   get name() {
     return this.employeeForm.get('name')!;
